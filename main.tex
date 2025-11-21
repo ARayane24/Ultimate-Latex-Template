@@ -1,0 +1,24 @@
+\documentclass[12pt, a4paper]{article}
+
+% 1. Load Configuration
+\input{config/settings.tex}
+
+% 2. Load Preamble
+\input{structure/preamble.tex}
+
+% 3. Metadata
+\title{\textbf{\DocTitle} \\ \large \DocSubtitle}
+\author{\DocAuthor}
+\date{\DocDate}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% 4. Import Content
+\input{content/01-introduction.tex}
+\input{content/02-demo.tex}
+
+\end{document}

@@ -1,0 +1,36 @@
+% =============================================
+%  CUSTOM COMMANDS (Your Toolkit)
+% =============================================
+
+% 1. Colored Info Box
+% (tcolorbox is now loaded in preamble.tex to avoid bidi conflicts)
+\newtcolorbox{infobox}[1][]{
+  colback=PrimaryColor!10,
+  colframe=PrimaryColor,
+  title=#1,
+  fonttitle=\bfseries,
+  sharp corners=south
+}
+
+% 2. Warning Box
+\newtcolorbox{warningbox}{
+  colback=red!10,
+  colframe=red!70!black,
+  title=Warning,
+  fonttitle=\bfseries
+}
+
+% 3. Keyword Highlighting
+\newcommand{\keyword}[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
+
+% 4. Quick Note
+\newcommand{\note}[1]{\noindent\textbf{\textit{[Note: #1]}}}
+
+% 5. Code Snippet Wrapper
+% (listings is now loaded in preamble.tex to avoid bidi conflicts)
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{gray!10},
+  frame=single,
+  breaklines=true
+}

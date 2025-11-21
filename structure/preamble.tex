@@ -1,0 +1,70 @@
+% =============================================
+%  PACKAGE LOADING & LOGIC
+% =============================================
+
+% --- Layout & Geometry ---
+\usepackage[a4paper, margin=\MarginSize]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small \textbf{\DocTitle}}
+\fancyhead[R]{\small \leftmark}
+\fancyfoot[C]{\thepage}
+
+% --- Spacing & Typography ---
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{\ParIndent}
+\setlength{\parskip}{\ParSkip}
+\usepackage{microtype}
+
+% --- Colors & Graphics ---
+\usepackage{xcolor}
+\definecolor{PrimaryColor}{HTML}{\ThemeColor}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+
+% --- Links ---
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=PrimaryColor,
+    urlcolor=PrimaryColor,
+    citecolor=PrimaryColor,
+    pdftitle={\DocTitle},
+    pdfauthor={\DocAuthor}
+}
+
+% --- Tables & Lists ---
+\usepackage{booktabs}
+\usepackage{enumitem}
+\setlist{nosep} % Compact lists
+
+% --- Tools (MUST LOAD BEFORE BIDI/POLYGLOSSIA) ---
+\usepackage{listings}
+\usepackage{tcolorbox}
+
+% --- Language & Fonts (The Heavy Lifting) ---
+\usepackage{fontspec}
+
+\ifRTLmode
+    % RTL Setup (Arabic/Hebrew)
+    % LuaLaTeX handles RTL via Babel or Polyglossia beautifully
+    \usepackage{polyglossia}
+    \setmainlanguage{\MainLanguage}
+    \setotherlanguage{\SecondLanguage}
+    \newfontfamily\arabicfont[Script=Arabic]{\ArabicFont}
+    \setmainfont{\MainFont}
+\else
+    % LTR Setup (English/French)
+    \usepackage{polyglossia}
+    \setmainlanguage{\MainLanguage}
+    \setotherlanguage{\SecondLanguage}
+    \setmainfont{\MainFont}
+    \setmonofont{\MonoFont}
+    % Define Arabic font just in case we mix languages
+    \newfontfamily\arabicfont[Script=Arabic]{\ArabicFont}
+\fi
+
+% --- Custom Command Definitions ---
+\input{structure/macros.tex}
