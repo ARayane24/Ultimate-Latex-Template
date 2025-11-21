@@ -1,0 +1,40 @@
+\newgeometry{top=2.5cm,bottom=1cm,left=1.5cm,right=1.5cm,heightrounded} % Special geometry
+\thispagestyle{empty}
+
+\begin{figure}[h]
+    \centering
+    % Robust image loading: Check if logo exists, else show placeholder
+    \IfFileExists{figures/logo.png}{
+        \includegraphics[width=0.15\linewidth]{figures/logo.png}
+    }{
+        \setlength{\fboxsep}{0pt}
+        \fbox{\parbox[c][3cm]{3cm}{\centering\bfseries\small Place\\logo.png\\here}}
+    }
+\end{figure}
+
+% Title Section
+\begin{center}
+    {\large \bfseries \CourseName  \\[5.4cm] }
+
+    \rule{\linewidth}{0.4mm} \\[0.4cm]
+
+    {\huge \bfseries \DocTitle \\[0.4cm] }
+
+    \rule{\linewidth}{0.4mm} \\[1.3cm]
+\end{center}
+
+% Author Section
+\begin{flushleft}
+    \Large
+    \textbf{By :}\\[1.4cm]
+    % \parbox allows the \\ in DocAuthor to function correctly as line breaks
+    \textsc{\parbox{\linewidth}{\DocAuthor}} \\[5.4cm]
+\end{flushleft}
+
+% Date Section
+\begin{center}
+    {\large \bfseries \AcademicYear \\[0.4cm] }
+\end{center}
+
+\restoregeometry % restore default geometry
+\newpage
