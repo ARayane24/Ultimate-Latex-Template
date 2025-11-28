@@ -96,11 +96,11 @@ Anyone can add:
 
 To build this project, you need:
 
-TeX Live (Linux & macOS)
+- TeX Live (Linux & macOS)
 
-MikTeX or TeX Live (Windows)
+- MikTeX or TeX Live (Windows)
 
-latexmk
+- latexmk
 
 lualatex (or xelatex)
 
