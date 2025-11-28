@@ -6,6 +6,13 @@
 % 2. Load Preamble
 \input{structure/preamble.tex}
 
+% 2.5. Load Additional Configurations
+\input{config/colors.tex}
+\input{config/header_footer_default/footer.tex}
+\input{config/header_footer_default/header.tex}
+\input{config/water_mark.tex}
+
+
 % 3. Metadata
 \title{\textbf{\DocTitle} \\ \large \DocSubtitle}
 \author{\DocAuthor}
@@ -14,7 +21,7 @@
 \begin{document}
 
 % Replace standard title with custom one
-\input{structure/titlepage.tex}
+\input{config/titlepage.tex}
 \tableofcontents
 \newpage
 

@@ -1,0 +1,22 @@
+% ==========================================
+%           WATERMARK SETUP
+% ==========================================
+
+\backgroundsetup{
+    scale=1.3,                % Adjust size (1 = original size, 2 = double, etc.)
+    opacity=0.3,            % Transparency (0.1 is faint, 0.9 is dark)
+    angle=0,                % Rotation (0 is upright, 45 is diagonal)
+    position=current page.center,
+    vshift=-2cm,             % Vertical shift if needed
+    hshift=0cm,             % Horizontal shift if needed
+    contents={%
+        \IfFileExists{figures/logo.png}{%
+            \includegraphics[width=10cm]{figures/logo.png}% Width of the watermark
+        }{%
+            % Placeholder if image is missing
+            \begin{tikzpicture}
+                \node[opacity=0.1, font=\bfseries\Huge, rotate=45] {WATERMARK};
+            \end{tikzpicture}
+        }%
+    }
+}

@@ -3,13 +3,19 @@
 % =============================================
 
 % --- Layout & Geometry ---
-\usepackage[a4paper, margin=\MarginSize]{geometry}
+% Load geometry package with custom margins
+\usepackage[a4paper,
+            top=\TopMargin,
+            bottom=\BottomMargin,
+            left=\LeftMargin,
+            right=\RightMargin]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\small \textbf{\DocTitle}}
 \fancyhead[R]{\small \leftmark}
 \fancyfoot[C]{\thepage}
+
 
 % --- Spacing & Typography ---
 \usepackage{setspace}
@@ -21,6 +27,7 @@
 % --- Colors & Graphics ---
 \usepackage{xcolor}
 \definecolor{PrimaryColor}{HTML}{\ThemeColor}
+\usepackage{wrapfig}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
 
@@ -37,6 +44,7 @@
 }
 
 % --- Tables & Lists ---
+\usepackage{array}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \setlist{nosep} % Compact lists
@@ -67,5 +75,11 @@
     \newfontfamily\arabicfont[Script=Arabic]{\ArabicFont}
 \fi
 
+\usepackage{ulem}     % for underlining
+\usepackage{caption}  % for customizing captions
+\usepackage{xparse} % For flexible argument handling
+\usepackage{expl3}
+\usepackage{comment} % For block comments
+\usepackage{background} % For watermarking
 % --- Custom Command Definitions ---
 \input{structure/macros.tex}

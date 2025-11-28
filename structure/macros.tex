@@ -34,3 +34,13 @@
   frame=single,
   breaklines=true
 }
+
+\newcommand{\fillWithDots}{\makebox[2.75cm]{\dotfill}} % Custom fill length for forms
+
+\newcommand{\IfNotEmpty}[2]{%
+  \if\relax\detokenize{#1}\relax
+    % argument is empty → do nothing
+  \else
+    #2 % argument not empty → execute this
+  \fi
+}
