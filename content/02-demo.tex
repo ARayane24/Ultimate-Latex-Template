@@ -1,7 +1,15 @@
+% =============================================
+% Demo of Custom Commands, TOC, and Mixed Language
+% =============================================
+
+\section{Demo: Custom Commands and TOC Features}
+
+
+% ---------------------------------------------
 \section{Custom Commands Demo}
 
 \subsection{Boxes}
-We have built-in boxes for important information:
+We have built-in boxes for highlighting important information:
 
 \begin{infobox}[Did you know?]
 LaTeX handles numbering automatically. You never have to manually update "Figure 1.1" ever again.
@@ -11,9 +19,60 @@ LaTeX handles numbering automatically. You never have to manually update "Figure
 We are now using \textbf{LuaLaTeX} to compile, which supports modern Variable Fonts better than XeLaTeX.
 \end{warningbox}
 
+\subsection{Keyword Highlighting}
+You can highlight important keywords like this: \keyword{Important Term}.
+
+\subsection{Quick Notes}
+Inline notes are easy:
+
+\note{This is a quick reminder about LuaLaTeX compilation.}
+
+\subsection{Code Snippets}
+You can include code blocks easily:
+
+\begin{lstlisting}[language=Python, caption=Python Example]
+def hello_world():
+    print("Hello World!")
+\end{lstlisting}
+
 \subsection{Mixed Language Support}
-If you enabled Arabic in the config, you can write:
+If Arabic is enabled in your `settings.tex`:
+
 \begin{center}
     \textarabic{السلام عليكم ورحمة الله وبركاته}
 \end{center}
-Or English text: \keyword{Hello World}.
+
+Or in English:
+
+\keyword{Hello World}
+
+% ---------------------------------------------
+\section{TOC Features Demo}
+
+\subsection{Section and Subsection Numbering}
+The TOC dynamically updates:
+
+\begin{itemize}
+    \item Section numbers can be Roman (\UseRomantrue) or Arabic (\UseRomanfalse)
+    \item Page numbers and section numbers are colored based on your theme
+    \item TOC supports LTR and RTL languages
+\end{itemize}
+
+\subsection{Color Customization}
+You can override TOC colors in `settings.tex` like this:
+
+\begin{verbatim}
+\setTOCColors{
+    section=red,
+    subsection=green,
+    subsubsection=orange,
+    number=blue,
+    roman=true,
+    title=purple
+}
+\end{verbatim}
+
+This will immediately reflect in your TOC.
+
+\subsection{RTL Demo}
+If RTL is enabled, the TOC title and numbering will automatically align to the right, and Arabic content will display correctly.

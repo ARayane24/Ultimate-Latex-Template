@@ -81,5 +81,111 @@
 \usepackage{expl3}
 \usepackage{comment} % For block comments
 \usepackage{background} % For watermarking
+
+
+% =============================================
+% Fully Dynamic, LuaLaTeX-Compatible, Language-Aware TOC
+% =============================================
+\usepackage{tocloft} % For TOC customization
+\usepackage{xcolor}  % Already loaded, safe to reuse
+
+% ---------------------------------------------
+% TOC Color Variables (can be overridden in settings.tex)
+% ---------------------------------------------
+\newcommand{\tocsectioncolor}{\color{PrimaryColor}}   % default: theme color
+\newcommand{\tocsubsectioncolor}{\color{purple}}      % default subsection color
+\newcommand{\tocsubsubsectioncolor}{\color{teal}}     % default subsubsection color
+\newcommand{\tocnumbercolor}{\color{black}}           % page numbers & section numbers
+\newcommand{\toctitlecolor}{\color{PrimaryColor}}     % TOC title color
+
+% ---------------------------------------------
+% Roman numbering toggle
+% ---------------------------------------------
+\newif\ifUseRoman
+\UseRomanfalse  % default: Arabic numbering; set \UseRomantrue in settings.tex for Roman
+
+% ---------------------------------------------
+% Section Numbering Format
+% ---------------------------------------------
+\renewcommand{\thesection}{%
+  \ifUseRoman \Roman{section}\else \arabic{section}\fi
+}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+% ---------------------------------------------
+% TOC Title Customization (Language-Aware)
+% ---------------------------------------------
+\ifRTLmode
+    \renewcommand{\contentsname}{المحتويات} % Arabic
+\else
+    \renewcommand{\contentsname}{Table of Topics} % Default LTR
+\fi
+
+\renewcommand{\cfttoctitlefont}{\Huge\bfseries\toctitlecolor} % TOC title font, size, color
+\renewcommand{\cftaftertoctitle}{\hfill}                        % Extra spacing after title
+
+% ---------------------------------------------
+% TOC Formatting using tocloft
+% ---------------------------------------------
+
+% --- Sections ---
+\renewcommand{\cftsecfont}{\tocsectioncolor\bfseries}       % Section text font/color
+\renewcommand{\cftsecpagefont}{\tocnumbercolor\bfseries}   % Page number color
+\renewcommand{\cftsecaftersnum}{. }                        % Dot after section number
+\setlength{\cftsecindent}{0pt}                             % Section indent
+\setlength{\cftbeforesecskip}{6pt}                         % Space before section in TOC
+
+% --- Subsections ---
+\renewcommand{\cftsubsecfont}{\tocsubsectioncolor\itshape} % Subsection text font/color
+\renewcommand{\cftsubsecpagefont}{\tocnumbercolor}         % Subsection page number color
+\setlength{\cftsubsecindent}{20pt}                         % Subsection indent
+\setlength{\cftbeforesubsecskip}{3pt}                      % Space before subsection in TOC
+
+% --- Subsubsections ---
+\renewcommand{\cftsubsubsecfont}{\tocsubsubsectioncolor}   % Subsubsection text font/color
+\renewcommand{\cftsubsubsecpagefont}{\tocnumbercolor}      % Subsubsection page number color
+\setlength{\cftsubsubsecindent}{40pt}                      % Subsubsection indent
+\setlength{\cftbeforesubsubsecskip}{1pt}                   % Space before subsubsection in TOC
+
+% ---------------------------------------------
+% Language-Aware TOC patch (RTL safe, LuaLaTeX)
+% ---------------------------------------------
+% Wrap TOC in \begin{arabic} ... \end{arabic} if RTL
+\usepackage{etoolbox} % For patching
+\ifRTLmode
+  \makeatletter
+  \patchcmd{\tableofcontents}{\@starttoc{toc}}%
+    {\begin{arabic}\@starttoc{toc}\end{arabic}}{}{}
+  \makeatother
+\fi
+
+% ---------------------------------------------
+% Optional: helper command to override all colors & numbering easily
+% Usage in settings.tex:
+% \setTOCColors{section=red,subsection=green,subsubsection=orange,number=blue,roman=true,title=purple}
+% ---------------------------------------------
+\ExplSyntaxOn
+\NewDocumentCommand{\setTOCColors}{m}
+{
+    \clist_map_inline:nn {#1} {
+        \seq_set_split:Nnn \l_tmpa_seq { = } {##1}
+        \seq_pop_left:NN \l_tmpa_seq \l_key_tl
+        \seq_pop_left:NN \l_tmpa_seq \l_val_tl
+        \tl_lower_case:n {%
+            \tl_if_eq:nnTF {\l_key_tl} {section} {\renewcommand{\tocsectioncolor}{\color{\l_val_tl}}}{}%
+            \tl_if_eq:nnTF {\l_key_tl} {subsection} {\renewcommand{\tocsubsectioncolor}{\color{\l_val_tl}}}{}%
+            \tl_if_eq:nnTF {\l_key_tl} {subsubsection} {\renewcommand{\tocsubsubsectioncolor}{\color{\l_val_tl}}}{}%
+            \tl_if_eq:nnTF {\l_key_tl} {number} {\renewcommand{\tocnumbercolor}{\color{\l_val_tl}}}{}%
+            \tl_if_eq:nnTF {\l_key_tl} {title} {\renewcommand{\toctitlecolor}{\color{\l_val_tl}}}{}%
+            \tl_if_eq:nnTF {\l_key_tl} {roman} {
+                \tl_if_eq:nnTF {\l_val_tl}{true}{\UseRomantrue}{\UseRomanfalse}
+            }{}
+        }
+    }
+}
+\ExplSyntaxOff
+
 % --- Custom Command Definitions ---
 \input{structure/macros.tex}
+

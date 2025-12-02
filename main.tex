@@ -1,31 +1,42 @@
 \documentclass[12pt, a4paper]{article}
 
+% =============================================
 % 1. Load Configuration
+% =============================================
 \input{config/settings.tex}
 
+% =============================================
 % 2. Load Preamble
+% =============================================
 \input{structure/preamble.tex}
 
-% 2.5. Load Additional Configurations
+% =============================================
+% 2.5. Additional Configurations
+% =============================================
 \input{config/colors.tex}
 \input{config/header_footer_default/footer.tex}
 \input{config/header_footer_default/header.tex}
 \input{config/water_mark.tex}
 
-
+% =============================================
 % 3. Metadata
-\title{\textbf{\DocTitle} \\ \large \DocSubtitle}
+% =============================================
+\title{\textbf{\DocTitle}}
 \author{\DocAuthor}
 \date{\DocDate}
 
 \begin{document}
 
-% Replace standard title with custom one
+% Custom title page
 \input{config/titlepage.tex}
+
+% Fully dynamic TOC
 \tableofcontents
 \newpage
 
+% =============================================
 % 4. Import Content
+% =============================================
 \input{content/01-introduction.tex}
 \input{content/02-demo.tex}
 
